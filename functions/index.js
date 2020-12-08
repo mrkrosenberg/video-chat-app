@@ -1,15 +1,24 @@
 require('dotenv').config();
-const functions = require('firebase-functions');
 const app = require('express')();
+const { functions } = require('./util/firebase');
+
+// Body parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// CORS
 const cors = require('cors');
+app.use(cors({ origin: true }));
 
+// Route imports
+const { getChatToken } = require('./handlers/tokenHandlers');
 
-exports.helloWorld = functions.https.onRequest((req, res) => {
-    res.send('good news everyone!')
-});
+// Auth middleware
+const authMiddleware = require('./util/authMiddleware');
 
-const { testFunction } = require('./handlers/test');
+// Routes
+app.get('/macdawg', getChatToken);
 
-app.get('/api', testFunction);
-
+// API entry point
 exports.api = functions.https.onRequest(app);
