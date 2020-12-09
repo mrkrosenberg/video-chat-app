@@ -2,11 +2,7 @@ const { db } = require('../util/firebase');
 const config = require('../config/twilioConfig');
 
 // Token functions
-const { 
-    chatToken, 
-    videoToken, 
-    voiceToken 
-}  = require('../util/tokenFunctions');
+const { videoToken }  = require('../util/tokenFunctions');
 
 // Response helper function
 const sendTokenResponse = (token, res) => {
