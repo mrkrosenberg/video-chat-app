@@ -1,13 +1,16 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 
+// Components
+import Lobby from '../lobby/Lobby';
+
 // Stylesheet
 import './VideoChat.scss';
 
 function VideoChat(props) {
 
-    const [ userName, setUserName ] = useState('macdawg');
-    const [ roomName, setRoomName ] = useState('macdawgs room');
+    const [ userName, setUserName ] = useState('');
+    const [ roomName, setRoomName ] = useState('');
     const [ token, setToken ] = useState(null);
 
     const handleUsernameChange = useCallback(event => {
@@ -42,11 +45,26 @@ function VideoChat(props) {
         setToken(null);
     }, []);
 
+    // Markup
+    const lobbyMarkup = token ? (
+        <div className="">
+            <p>Username: {userName}</p>
+            <p>Room name: {roomName}</p>
+            <p>Token: {token}</p>
+        </div>
+    ) : (
+        <Lobby 
+            userName={userName}
+            roomName={roomName}
+            handleUserNameChange={handleUsernameChange}
+            handleRoomNameChange={handleRoomNameChange}
+            handleSubmit={handleSubmit}
+        />
+    )
+
 
     return (
-        <div>
-            <button onClick={handleSubmit}>click</button>
-        </div>
+        lobbyMarkup
     );
 };
 

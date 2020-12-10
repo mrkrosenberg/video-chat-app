@@ -36,7 +36,7 @@ function Lobby({ userName, handleUserNameChange, roomName, handleRoomNameChange,
                 />
             </div>
             <div className="button-container">
-                <button type="submit"></button>
+                <button type="submit">Do the thing</button>
             </div>
         </form>
     );
