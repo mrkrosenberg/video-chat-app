@@ -27,7 +27,7 @@ function VideoChat(props) {
         const tokenConfig = {
             identity: userName,
             room: roomName
-        }
+        };
         axios.post('/video/token', tokenConfig)
             .then(token => {
                 console.log('token: ', token)
