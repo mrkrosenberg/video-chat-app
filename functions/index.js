@@ -12,13 +12,17 @@ const cors = require('cors');
 app.use(cors({ origin: true }));
 
 // Route imports
-const { getChatToken } = require('./handlers/tokenHandlers');
+const { 
+    getVideoToken,
+    postVideoToken 
+} = require('./handlers/tokenHandlers');
 
 // Auth middleware
 const authMiddleware = require('./util/authMiddleware');
 
 // Routes
-app.get('/macdawg', getChatToken);
+app.get('/video/token', getVideoToken);
+app.post('/video/token', postVideoToken);
 
 // API entry point
 exports.api = functions.https.onRequest(app);
