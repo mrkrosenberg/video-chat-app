@@ -32,8 +32,9 @@ function VideoChat(props) {
             room: roomName
         };
         axios.post('/video/token', tokenConfig)
-            .then(token => {
-                console.log('token: ', token)
+            .then(tokenResponse => {
+                console.log('token: ', tokenResponse);
+                setToken(tokenResponse.data.token)
             })
             .catch(err => {
                 console.error('error: ', err)
