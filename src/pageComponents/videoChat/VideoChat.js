@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // Components
 import Lobby from '../lobby/Lobby';
+import Room from '../room/Room';
 
 // Stylesheet
 import './VideoChat.scss';
@@ -33,7 +34,6 @@ function VideoChat(props) {
         };
         axios.post('/video/token', tokenConfig)
             .then(tokenResponse => {
-                console.log('token: ', tokenResponse);
                 setToken(tokenResponse.data.token)
             })
             .catch(err => {
@@ -48,11 +48,11 @@ function VideoChat(props) {
 
     // Markup
     const lobbyMarkup = token ? (
-        <div className="">
-            <p>Username: {userName}</p>
-            <p>Room name: {roomName}</p>
-            <p>Token: {token}</p>
-        </div>
+        <Room 
+            roomName={roomName}
+            token={token}
+            handleLeaveRoom={handleLeaveRoom}
+        />
     ) : (
         <Lobby 
             userName={userName}
