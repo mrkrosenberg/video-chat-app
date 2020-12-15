@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 
+// Components
+import Participant from '../../componentComponents/participants/Participants';
+
 // Stylesheet
 import './Room.scss';
 
@@ -46,7 +49,7 @@ function Room({ roomName, token, handleLeaveRoom }) {
 
     // Participants markup
     const remoteParticipants = participants.map(participant => {
-         return (<p key={participant.sid}>{participant.identity}</p>)
+         return (<Participant key={participant.sid} participant={participant} />)
     });
 
     return (
@@ -55,7 +58,7 @@ function Room({ roomName, token, handleLeaveRoom }) {
             <button onClick={handleLeaveRoom}>Log out</button>
             <div className="local-participant">
                 {room ? (
-                    <p key={room.localParticipant.sid}>{room.localParticipant.identity}</p>
+                    <Participant key={room.localParticipant.sid} participant={room.localParticipant} />
                 ) : (
                     null
                 )}
