@@ -60,7 +60,7 @@ function VideoChat(props) {
             handleRoomNameChange={handleRoomNameChange}
             handleSubmit={handleSubmit}
         />
-    )
+    );
 
 
     return (
