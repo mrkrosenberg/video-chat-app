@@ -11,6 +11,7 @@ function Room({ roomName, token, handleLeaveRoom }) {
 
     const [ room, setRoom ] = useState(null);
     const [ participants, setParticipants ] = useState([]);
+    let remoteParticipants;
 
     useEffect(() => {
         
@@ -48,9 +49,12 @@ function Room({ roomName, token, handleLeaveRoom }) {
     }, [roomName, token]);
 
     // Participants markup
-    const remoteParticipants = participants.map(participant => {
-         return (<Participant key={participant.sid} participant={participant} />)
-    });
+    if (participants) {
+        remoteParticipants = participants.map(participant => {
+            return <Participant key={participant.sid} participant={participant} />
+       });
+    };
+    
 
     return (
         <div className="room">
@@ -60,11 +64,11 @@ function Room({ roomName, token, handleLeaveRoom }) {
                 {room ? (
                     <Participant key={room.localParticipant.sid} participant={room.localParticipant} />
                 ) : (
-                    null
+                    ''
                 )}
             </div>
             <h3>Remote Participants</h3>
-            <div className="remote-participants">{remoteParticipants}</div>
+            <div className="remote-participants">{remoteParticipants ? remoteParticipants : null}</div>
       </div>
     );
 }
